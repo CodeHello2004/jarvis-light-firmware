@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070b14">
+  <title>Simple Circuits — Jarvis Firmware Installer</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root{--bg:#070b14;--panel:#101827;--ink:#f7f9ff;--muted:#a9b4c8;--blue:#52a7ff;--cyan:#55e6d4;--line:rgba(255,255,255,.1)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(circle at 15% 10%,rgba(82,167,255,.2),transparent 32%),radial-gradient(circle at 88% 12%,rgba(85,230,212,.14),transparent 28%),var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{width:min(1060px,calc(100% - 32px));margin:auto;padding:28px 0 46px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:42px}.brand{display:flex;align-items:center;gap:12px;font-weight:800}.logo{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#06101b}.secure{color:var(--muted);font-size:13px}
+    .hero{text-align:center;max-width:780px;margin:0 auto 34px}.eyebrow{display:inline-flex;padding:7px 12px;border:1px solid rgba(85,230,212,.24);border-radius:999px;background:rgba(85,230,212,.08);color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(38px,7vw,72px);line-height:.98;margin:22px 0 18px;letter-spacing:-.055em}.hero p{margin:0;color:var(--muted);font-size:clamp(16px,2.2vw,20px);line-height:1.65}
+    .grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);overflow:hidden;border:1px solid var(--line);border-radius:28px;background:rgba(16,24,39,.92);box-shadow:0 26px 80px rgba(0,0,0,.48)}.main,.steps{padding:36px}.steps{background:rgba(255,255,255,.025);border-left:1px solid var(--line)}h2{font-size:24px;margin:0 0 8px}.copy{color:var(--muted);line-height:1.6;margin:0 0 24px}label{display:block;margin:0 0 8px;font-size:13px;font-weight:750}
+    select{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:#0b1220;color:var(--ink);font:inherit;outline:none}select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(82,167,255,.12)}.firmware{display:flex;justify-content:space-between;gap:18px;align-items:center;margin:18px 0 22px;padding:16px;border:1px solid rgba(85,230,212,.18);border-radius:16px;background:rgba(85,230,212,.055)}.fw-name{font-weight:800}.fw-meta{margin-top:5px;color:var(--muted);font-size:13px}.badge{padding:6px 10px;border-radius:999px;background:rgba(85,230,212,.12);color:var(--cyan);font-size:11px;font-weight:900;text-transform:uppercase}
+    esp-web-install-button{display:block}.install{width:100%;border:0;border-radius:16px;padding:17px 20px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#04111d;font:800 16px/1 inherit;cursor:pointer;box-shadow:0 14px 30px rgba(82,167,255,.22)}.install:disabled{cursor:not-allowed;opacity:.38}.warning{display:block;padding:14px;border:1px solid rgba(255,174,80,.26);border-radius:14px;background:rgba(255,174,80,.08);color:#ffd3a1;line-height:1.5}.note{display:flex;gap:10px;margin-top:18px;color:var(--muted);font-size:13px;line-height:1.55}
+    .step{display:grid;grid-template-columns:34px 1fr;gap:12px;margin-top:22px}.num{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:rgba(82,167,255,.12);color:var(--blue);font-weight:900}.step h3{margin:2px 0 5px;font-size:15px}.step p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.safety{margin-top:22px;padding:15px 16px;border:1px solid rgba(255,94,94,.22);border-radius:15px;background:rgba(255,94,94,.07);color:#ffc4c4;font-size:13px;line-height:1.55}footer{text-align:center;color:#77849b;font-size:12px;margin-top:25px}
+    @media(max-width:780px){.secure{display:none}.grid{grid-template-columns:1fr}.steps{border-left:0;border-top:1px solid var(--line)}.main,.steps{padding:26px 22px}.firmware{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><div class="brand"><span class="logo">SC</span><span>Simple Circuits</span></div><div class="secure">Secure browser installer · No software required</div></header>
+    <main>
+      <section class="hero"><span class="eyebrow">Offline Voice Control</span><h1>Install Jarvis<br>in one click.</h1><p>Connect your XIAO ESP32-S3 Sense and install the complete offline Jarvis light firmware directly from Chrome or Microsoft Edge.</p></section>
+      <section class="grid">
+        <div class="main">
+          <h2>Select your board</h2><p class="copy">The firmware includes the wake word, commands, OLED face, audio responses and relay control.</p>
+          <label for="board">ESP32 board</label>
+          <select id="board"><option value="" selected>Select a board…</option><option value="xiao">Seeed Studio XIAO ESP32-S3 Sense</option></select>
+          <div class="firmware"><div><div class="fw-name" id="fwName">Waiting for board selection</div><div class="fw-meta" id="fwMeta">Firmware version 1.0.0</div></div><span class="badge" id="badge">Waiting</span></div>
+          <esp-web-install-button id="installer"><button class="install" id="installButton" slot="activate" disabled>Connect &amp; Install Firmware</button><span class="warning" slot="unsupported">Open this page in desktop Google Chrome or Microsoft Edge.</span><span class="warning" slot="not-allowed">Open the published HTTPS GitHub Pages address.</span></esp-web-install-button>
+          <div class="note"><span>ⓘ</span><span>Choose the COM port that appears when your XIAO is connected. Keep USB connected until installation reaches 100%.</span></div>
+        </div>
+        <aside class="steps">
+          <h2>Before installing</h2>
+          <div class="step"><span class="num">1</span><div><h3>Disconnect AC power</h3><p>Connect only the low-voltage controller to the computer.</p></div></div>
+          <div class="step"><span class="num">2</span><div><h3>Use a USB data cable</h3><p>A charging-only cable cannot flash the board.</p></div></div>
+          <div class="step"><span class="num">3</span><div><h3>Select the COM port</h3><p>Choose the port belonging to the XIAO.</p></div></div>
+          <div class="step"><span class="num">4</span><div><h3>Wait for 100%</h3><p>Do not unplug or reset during installation.</p></div></div>
+          <div class="safety"><strong>Safety:</strong> Never connect exposed mains wiring while the XIAO is connected to a computer by USB.</div>
+        </aside>
+      </section>
+    </main>
+    <footer>Jarvis Offline Light · Firmware by Simple Circuits</footer>
+  </div>
+  <script>
+    (function(){var b=document.getElementById('board'),i=document.getElementById('installer'),x=document.getElementById('installButton'),n=document.getElementById('fwName'),m=document.getElementById('fwMeta'),g=document.getElementById('badge');b.addEventListener('change',function(){if(b.value==='xiao'){i.setAttribute('manifest','manifest-xiao-esp32s3.json');x.disabled=false;n.textContent='Jarvis Offline Light';m.textContent='XIAO ESP32-S3 Sense · Complete offline firmware';g.textContent='Ready'}else{i.removeAttribute('manifest');x.disabled=true;n.textContent='Waiting for board selection';m.textContent='Firmware version 1.0.0';g.textContent='Waiting'}})})();
+  </script>
+</body>
+</html>
